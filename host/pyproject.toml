@@ -1,0 +1,17 @@
+[project]
+name = "care-pathway-host"
+version = "0.1.0"
+description = "Care Pathway fail-closed host: JSON tools, code verifier, watermarked card. Dummy tools only."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "pydantic>=2.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "httpx>=0.27"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

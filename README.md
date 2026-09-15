@@ -29,4 +29,4 @@ No experimental accuracy number is claimed in this repository until it is measur
 
 ## Status
 
-Phase-1 synopsis and decks. Implementation (tools, verifier, gold set) will land on feature branches via PRs.
+Phase-1 synopsis and decks. Host v0 (`host/`): dummy tools, code verifier, watermarked card. Further work on feature branches via PRs.
