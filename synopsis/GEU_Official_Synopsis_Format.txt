@@ -1,0 +1,79 @@
+
+CERTIFICATE
+
+
+This is to certify that the project synopsis entitled "Title of Project" is being submitted by Name of Student with their enrollment number for the partial fulfillment of the requirement for the award of the degree of B. Tech-CSE (write appropriate specialization, if any) in Department of Computer Science & Engineering, Graphic Era Deemed to be University, Dehradun, and is a record of his/her own work carried out under my supervision. The matter embodied in the synopsis has not been submitted in any other university or institution for the award of any degree.  
+
+
+
+
+Name of the Supervisor 				
+Designation 
+Department of Computer Science and Engineering,
+Graphic Era Deemed to be University, Dehradun, India. 
+
+
+
+
+
+
+
+
+
+DECLARATION 
+
+I/we hereby declare that the project synopsis entitled "Title of Project" is being submitted for the partial fulfillment of the requirement for the award of the degree of B. Tech-CSE (write appropriate specialization, if any) in Department of Computer Science & Engineering, Graphic Era Deemed to be University, Dehradun, is my/our original work and has not been submitted to any other university or institution for the award of any degree or diploma. 
+
+
+Name of Student1(Enrollment No.)                                                Signature
+Name of Student2(Enrollment No.)                                                Signature
+Name of Student3(Enrollment No.)                                                Signature
+Name of Student4(Enrollment No.)                                                Signature
+
+
+
+
+
+
+
+
+
+
+
+TABLE OF CONTENTS
+
+
+S.No.		    CONTENT 						PAGE NO.
+
+
+                            Abstract 
+1.Introduction 2.Literature Review3.Problem Statement & Objectives4.
+
+5. Proposed Methodology
+
+Hardware and Software Requirements
+6.
+
+7.Expected Outcomes 
+
+Conclusion 
+References
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Students are required to prepare the synopsis report refering to above mention table of content in consultation with their supervisor. 
+1 | Page
+
+
+

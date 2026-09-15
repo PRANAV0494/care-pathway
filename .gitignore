@@ -1,0 +1,33 @@
+node_modules/
+.worktrees/
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+.env
+.env.*
+*.anim.zip
+
+# local PPT/XML unpack + preview dumps
+synopsis/presentation/_unpacked/
+synopsis/presentation/_unpacked_geu/
+synopsis/presentation/cardiosense_unpacked/
+synopsis/presentation/cardiosense_preview/
+synopsis/presentation/preview/
+synopsis/presentation/preview_geu/
+synopsis/presentation/preview_vp_dark/
+synopsis/preview/
+synopsis/preview_health/
+synopsis/_desktop_verify/
+synopsis/_extract_for_verify.txt
+synopsis/_full_ppt.txt
+synopsis/_full_report.txt
+synopsis/presentation/_pptx_text.txt
+
+# other-team / old-project artefacts — not Care Pathway
+HybridRAG*
+Nirnaya-112*
+synopsis/Nirnaya-112*
+synopsis/COVER_FIELDS.js
+synopsis/generate_synopsis.js
+synopsis/presentation/CardioSense_AI.pptx
