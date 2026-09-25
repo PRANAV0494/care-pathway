@@ -15,6 +15,8 @@ from care_pathway.tools import run as run_tool
 from care_pathway.verifier import verify
 
 STATIC = Path(__file__).resolve().parent.parent / "static"
+# Demo-only in-process trace store: single-process list, no lock, no
+# persistence. Production would use an external sink; the cap only bounds RAM.
 TRACES: list[dict] = []
 TRACE_CAP = 500
 
