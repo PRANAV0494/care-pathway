@@ -12,6 +12,7 @@ If GEPA loses to hand prompt, we report that (no forced positive).
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -21,6 +22,12 @@ from ..schemas import GoldRecord
 from ..verifier import text_feedback
 
 PROMPT_DIR = Path(__file__).resolve().parents[1] / "llm" / "prompts"
+
+
+def _stable_bucket(qid: str) -> int:
+    # hashlib, not hash(): PYTHONHASHSEED salts hash() per process, which would
+    # reshuffle train/val every run. sha256 is stable across processes.
+    return int(hashlib.sha256(qid.encode("utf-8")).hexdigest(), 16) % 10
 
 
 @dataclass
@@ -118,8 +125,8 @@ def run(gold_path: Path, budget: int = 4, out_dir: Path | None = None) -> dict:
     """Offline GEPA-lite: hand baseline + budgeted mutations, Pareto freeze."""
     records = _load_gold(gold_path)
     # Split by qid hash: 50/20/30 train/val/test (stable, no leak by image).
-    train = [r for r in records if hash(r.qid) % 10 < 5]
-    val = [r for r in records if 5 <= hash(r.qid) % 10 < 7]
+    train = [r for r in records if _stable_bucket(r.qid) < 5]
+    val = [r for r in records if 5 <= _stable_bucket(r.qid) < 7]
     cands = [Candidate(name="hand-prompt-v1")]
     cands[0] = evaluate(cands[0], train)
     for i, (r_extra, a_extra) in enumerate(MUTATIONS[:budget]):

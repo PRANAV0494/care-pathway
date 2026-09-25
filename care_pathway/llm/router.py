@@ -1,4 +1,8 @@
-"""Router LLM role — structured tool call only. Host executes the function."""
+"""Router LLM role — structured tool call only. Host executes the function.
+
+Router-level choices only: nlem_lookup / cdsco_lookup / stw_retrieve are host
+sub-lookups inside a turn, never router decisions.
+"""
 from __future__ import annotations
 
 from . import prompts

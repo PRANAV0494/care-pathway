@@ -57,7 +57,7 @@ def verify(tool: str, draft: str, spans: list[STWSpan], tool_json: dict,
     # approximated: draft minus boilerplate must overlap span blob.
     boiler = {"cited", "workflow", "box", "listed", "entry", "found", "verified", "against",
               "the", "list", "row", "batch", "matches", "dated", "nsq", "snapshot", "never",
-              "safe", "stW", "says", "kehta", "hai", "par", "me", "karo", "ki", "ke", "ka"}
+              "safe", "stw", "says", "kehta", "hai", "par", "me", "karo", "ki", "ke", "ka"}
     content = [w.strip(".,;:()[]").lower() for w in d.split()]
     content = [w for w in content if w and w not in boiler and len(w) > 2 and not w.startswith("stw-")]
     if content:

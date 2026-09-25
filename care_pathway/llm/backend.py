@@ -26,7 +26,7 @@ class RuleBackend:
             return "out_of_scope"
         if "antibiotic" in q and ("no report" in q or "without" in q or "bina" in q or "koi report nahi" in q):
             return "out_of_scope"
-        if ik in ("cxr",) or "x-ray" in q or "xray" in q or "cxr" in q or "khaansi" in q and "film" in q or "chest x" in q:
+        if ik in ("cxr",) or "x-ray" in q or "xray" in q or "cxr" in q or ("khaansi" in q and "film" in q) or "chest x" in q:
             # image kind wins when present
             if ik == "cxr":
                 return "cxr_tool"
