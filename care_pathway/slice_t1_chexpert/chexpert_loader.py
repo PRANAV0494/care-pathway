@@ -19,27 +19,26 @@ class ChexpertSplit:
     val_patients: int = 0
     test_patients: int = 0
     u_policy: str = "U-zeros-reported"
+    counted: bool = False  # False until a real CheXpert CSV walk fills counts.
 
 
 def plan_split(root: Path, out: Path) -> ChexpertSplit:
     """Write a patient-level split plan (no image may leak across splits).
 
-    Stub: inspects root if present, else writes a smoke plan with zeros.
-    Real run on B200 fills counts from CheXpert-small CSVs.
+    Stub: counts stay 0 with counted=False until the B200 run walks real
+    CheXpert-small CSVs. data_present records whether root existed at all.
     """
     out.parent.mkdir(parents=True, exist_ok=True)
-    if root.exists():
-        counts = ChexpertSplit(train_patients=-1, val_patients=-1, test_patients=-1)
-    else:
-        counts = ChexpertSplit()
+    counts = ChexpertSplit(counted=False)
     out.write_text(
         f"train_patients={counts.train_patients}\nval_patients={counts.val_patients}\n"
-        f"test_patients={counts.test_patients}\nu_policy={counts.u_policy}\n",
+        f"test_patients={counts.test_patients}\nu_policy={counts.u_policy}\n"
+        f"counted={counts.counted}\ndata_present={root.exists()}\n",
         encoding="utf-8",
     )
     return counts
 
 
 def smoke() -> dict:
-    plan = plan_split(Path("data-not-present"), Path("artifacts/slice_t1_split.txt"))
-    return {"smoke": True, "u_policy": plan.u_policy, "metrics": "not-measured"}
+    # No file side effect; plan_split (with tmp_path in tests) covers I/O.
+    return {"smoke": True, "u_policy": ChexpertSplit().u_policy, "metrics": "not-measured"}
