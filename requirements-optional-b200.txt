@@ -1,0 +1,15 @@
+# Optional B200 / heavy deps — NOT required for CPU baseline.
+# Install only on campus GPU machine for real training / VLM / ColPali / GEPA rollouts.
+# CPU baseline runs without any of these.
+
+torch>=2.3
+torchvision>=0.18
+timm>=0.9
+transformers>=4.41
+accelerate>=0.30
+vllm>=0.5 ; sys_platform != "win32"
+dspy-ai>=2.5
+faiss-cpu>=1.8
+qdrant-client>=1.9
+pypdf>=4.0
+paddleocr>=2.7 ; sys_platform != "win32"
