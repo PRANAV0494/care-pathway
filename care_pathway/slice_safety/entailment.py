@@ -1,10 +1,11 @@
-"""S8 — Entailment checker + verifier hardening (code, not a neural net).
+"""S8 — Word-overlap pre-gate for the verifier (code, not a neural net).
 
-Rules: every clinical sentence must overlap a retrieved STW/NLEM/CDSCO span;
-score-as-diagnosis fails unless the box uses that wording; OOS clinical text
-fails; unreadable -> insufficient; disagreement -> one extra look then silent.
-Optional NLI model plugs in later; human gold on test cards decides. The
-checker never generates guideline text — it only accepts/strips/refuses.
+Scope: this module implements ONLY the overlap check (sentence content words
+vs span blob, >= 0.25). OOS-strip, unreadable, disagreement-retry, and
+score-as-diagnosis live in the PR2/PR3 verifiers, not here. Heuristic limits:
+drops words <= 3 chars, ignores negation, common words can false-entail — so
+this is NOT the final safety gate. Optional NLI + human gold on test cards
+decide; the checker never generates guideline text.
 """
 from __future__ import annotations
 
