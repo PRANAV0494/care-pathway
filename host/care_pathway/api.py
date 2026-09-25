@@ -16,6 +16,7 @@ from care_pathway.verifier import verify
 
 STATIC = Path(__file__).resolve().parent.parent / "static"
 TRACES: list[dict] = []
+TRACE_CAP = 500
 
 app = FastAPI(
     title="Care Pathway host v0",
@@ -90,6 +91,8 @@ def consult(body: ConsultIn):
             "dummy": bool(tool_json.get("dummy")),
         }
     )
+    # Bound in-memory demo store; hashed question ids only, no raw text/images.
+    del TRACES[:-TRACE_CAP]
     return {
         "question_id": qid,
         "tool_json": tool_json,
