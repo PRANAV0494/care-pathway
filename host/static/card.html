@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Care Pathway — demo card</title>
+  <style>
+    :root { --cream:#F7F4EE; --ink:#1C1917; --navy:#16324F; --gold:#B8954A; --muted:#6B6560; }
+    body { font-family: Georgia, serif; background: var(--cream); color: var(--ink); margin: 0; }
+    main { max-width: 720px; margin: 2rem auto; padding: 0 1.25rem 3rem; }
+    h1 { font-size: 1.8rem; color: var(--navy); margin-bottom: .25rem; }
+    .sub { color: var(--muted); font-family: Calibri, sans-serif; margin-bottom: 1.5rem; }
+    label { display: block; font-family: Calibri, sans-serif; font-size: .85rem; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; margin: .8rem 0 .25rem; }
+    input, select, textarea { width: 100%; box-sizing: border-box; font: 1rem Calibri, sans-serif; padding: .5rem .6rem; border: 1px solid #D9D2C5; background: #FFFCF7; }
+    button { margin-top: 1rem; background: var(--navy); color: #fff; border: 0; padding: .6rem 1.1rem; font: 1rem Calibri, sans-serif; cursor: pointer; }
+    .card { margin-top: 1.5rem; background: #FFFCF7; border-left: 6px solid var(--gold); padding: 1rem 1.1rem; }
+    .status { font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+    .sentence { font-size: 1.15rem; margin: .5rem 0 1rem; min-height: 1.4em; }
+    .wm { font-size: .85rem; color: var(--muted); font-style: italic; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Care Pathway</h1>
+  <p class="sub">Dummy tools. Real verifier. Educational prototype — not a diagnosis.</p>
+  <label>Question</label>
+  <textarea id="q" rows="3">Is paracetamol on the NLEM 2022 list?</textarea>
+  <label>Tool</label>
+  <select id="tool">
+    <option value="nlem_lookup">nlem_lookup</option>
+    <option value="cdsco_lookup">cdsco_lookup</option>
+    <option value="stw_retrieve">stw_retrieve</option>
+    <option value="cxr_tool">cxr_tool</option>
+    <option value="skin_tool">skin_tool</option>
+    <option value="document_tool">document_tool</option>
+    <option value="out_of_scope">out_of_scope</option>
+  </select>
+  <label>Draft sentence (must be copied from a span to ground)</label>
+  <textarea id="draft" rows="2">Paracetamol is listed in NLEM 2022.</textarea>
+  <label>Official span text</label>
+  <textarea id="span" rows="2">Paracetamol is listed in NLEM 2022.</textarea>
+  <button type="button" id="go">Run host</button>
+  <div class="card" id="out">
+    <div class="status" id="st">no card yet</div>
+    <div class="sentence" id="se"></div>
+    <div class="wm" id="wm"></div>
+  </div>
+</main>
+<script>
+const argFor = (name, q) => {
+  if (name === "nlem_lookup") return { name: "paracetamol" };
+  if (name === "cdsco_lookup") return { product: "paracetamol", batch: "DUMMY" };
+  if (name === "stw_retrieve") return { query: q };
+  return { file_id: "demo" };
+};
+document.getElementById("go").onclick = async () => {
+  const q = document.getElementById("q").value;
+  const name = document.getElementById("tool").value;
+  const draft = document.getElementById("draft").value;
+  const span = document.getElementById("span").value;
+  const body = {
+    question: q,
+    tool_call: { name, arguments: argFor(name, q) },
+    draft,
+    spans: span.trim() ? [{ source: "nlem", id: "nlem-2022-paracetamol", text: span }] : []
+  };
+  const r = await fetch("/v1/consult", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  const data = await r.json();
+  if (!r.ok) {
+    document.getElementById("st").textContent = "error";
+    document.getElementById("se").textContent = data.detail || JSON.stringify(data);
+    document.getElementById("wm").textContent = "";
+    return;
+  }
+  document.getElementById("st").textContent = data.card.status + " · " + (data.card.reason || "");
+  document.getElementById("se").textContent = data.card.sentence || "(no sentence)";
+  document.getElementById("wm").textContent = data.card.watermark;
+};
+</script>
+</body>
+</html>
