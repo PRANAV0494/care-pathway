@@ -13,7 +13,8 @@ WATERMARK = "NOT A DIAGNOSIS. Not a substitute for a registered medical practiti
 
 
 def card_shape(status: str) -> dict:
-    assert status in STATUSES
+    if status not in STATUSES:
+        raise ValueError(f"unknown card status: {status!r}")
     return {"status": status, "watermark": WATERMARK, "human_check_n": 20}
 
 
