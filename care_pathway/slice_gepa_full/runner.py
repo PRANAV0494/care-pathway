@@ -1,10 +1,10 @@
 """S9 — GEPA full runner (offline only; prompts frozen for demo).
 
-GEPA (Agrawal et al., ICLR 2026, dspy.GEPA): run compound program on train,
-read traces (tool JSON, page, draft, verifier TEXT), reflect, mutate prompts,
-keep Pareto on coverage vs ungrounded-rate. Optimizes router/answer text ONLY —
-never T1/T2/T3 weights, tables, pixels, or verifier rules. No search per query.
-Budget light/medium on B200; if hand prompt wins, report that.
+Division: the baseline's gepa/optimizer.py is the real lite-runner (traces,
+Pareto, freeze); this module is the B200 full-budget wrapper around the same
+contract (offline, prompt text only — never T1/T2/T3 weights, tables, pixels,
+or verifier rules; no search per query). GEPA paper: Agrawal et al., ICLR
+2026, dspy.GEPA. Budget light/medium on B200; if hand prompt wins, report that.
 """
 from __future__ import annotations
 
