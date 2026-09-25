@@ -8,6 +8,7 @@ Budget light/medium on B200; if hand prompt wins, report that.
 """
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 
@@ -15,7 +16,7 @@ def run_full(gold: Path, budget: int, out: Path) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     result = {"mode": "offline", "budget": budget, "best": "frozen-after-run",
               "metric": "coverage-vs-ungrounded", "note": "no per-query search"}
-    (out / "gepa_full_result.json").write_text(str(result), encoding="utf-8")
+    (out / "gepa_full_result.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
     return result
 
 
