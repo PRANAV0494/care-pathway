@@ -16,6 +16,11 @@ def normalize(name: str) -> str:
 
 
 def resolve_brand(query: str) -> str:
+    """Map brand -> generic; unknown returns "" (falsy — callers check `if not`).
+
+    Stub scope: case/whitespace only, no punctuation stripping ("Crocin-500"
+    will not match); full PDF parse handles strengths/forms later.
+    """
     return BRAND_GENERIC.get(normalize(query), "")
 
 
