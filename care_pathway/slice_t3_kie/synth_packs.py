@@ -1,9 +1,10 @@
 """S3 — T3 document KIE: synthetic packs + self-collected OTC photos.
 
 Honest gap: no locked public Indian strip/carton set. Methods Donut /
-LayoutLMv3 / PaddleOCR. Synthetic packs join real CDSCO batch strings;
-no patient prescriptions. Metric: field-F1 / exact batch match (not-measured
-until real layouts run). Never returns a safety verdict.
+LayoutLMv3 / PaddleOCR. At training time synthetic packs will join real CDSCO
+batch strings (smoke below uses ABxxxx only, single brand Crocin — not OCR
+variance); no patient prescriptions. Metric: field-F1 / exact batch match
+(not-measured until real layouts run). Never returns a safety verdict.
 """
 from __future__ import annotations
 
