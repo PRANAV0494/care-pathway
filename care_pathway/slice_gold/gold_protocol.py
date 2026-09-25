@@ -1,8 +1,10 @@
 """S7 — Gold Q&A expansion protocol (seed -> 400-800, honestly).
 
-Schema per item: qid, question, image?, gold_route, gold_status, gold_span_id,
-gold_reply. Rules: split BY QID (50/20/30); same image never leaks train/test;
-dual annotation + disagreement protocol BEFORE numbers; near-miss refusals are
+Schema: required qid, question, gold_route, gold_status; optional gold_span_id,
+gold_reply (validated when present). Rules: split BY QID (50/20/30, sha256
+stable); same image must never leak train/test — enforce with an image-aware
+check before 400-800 labeling (hash alone cannot guarantee it); dual
+annotation + disagreement protocol BEFORE numbers; near-miss refusals are
 first-class (not only answered twins); Hinglish subset included.
 This slice ships the protocol + validator + generator stub (no fake labels).
 """
