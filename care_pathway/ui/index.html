@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Care Pathway — educational prototype</title>
+<link rel="stylesheet" href="/ui/styles.css" />
+</head>
+<body>
+<header>
+  <h1>Care Pathway</h1>
+  <p class="sub">Guideline-grounded assistant · educational prototype</p>
+  <p class="watermark">NOT A DIAGNOSIS. Not a substitute for a registered medical practitioner.</p>
+</header>
+<main>
+  <section class="card input">
+    <label>Question (English / Hinglish)
+      <textarea id="q" rows="3">Mujhe 3 hafte se khaansi hai, chest X-ray karaya hai. Kya workflow kehta hai?</textarea>
+    </label>
+    <div class="row">
+      <label>Image kind
+        <select id="hint">
+          <option value="none">none</option>
+          <option value="cxr">cxr</option>
+          <option value="skin">skin</option>
+          <option value="pack">pack</option>
+          <option value="lab">lab</option>
+        </select>
+      </label>
+      <label>File (optional, max 8 MB)
+        <input id="f" type="file" />
+      </label>
+      <label>Token
+        <input id="tok" value="demo-token" />
+      </label>
+    </div>
+    <button id="send">Ask</button>
+    <p class="hint">Demo login: token <code>demo-token</code>. No patient identity is stored; traces are hashed.</p>
+  </section>
+  <section id="out" class="card result" hidden>
+    <div id="status"></div>
+    <p id="reply"></p>
+    <pre id="json"></pre>
+    <p class="watermark">NOT A DIAGNOSIS. Not a substitute for a registered medical practitioner.</p>
+  </section>
+</main>
+<script src="/ui/app.js"></script>
+</body>
+</html>

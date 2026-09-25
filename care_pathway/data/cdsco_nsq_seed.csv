@@ -1,0 +1,4 @@
+product,batch_no,manufacturer,test_failed,snapshot_month,source
+Paracetamol 500mg,AB1234,Seed Pharma Ltd,Assay,2026-08,CDSCO-NSQ-seed
+Azithromycin 500mg,ZX9001,Seed Labs Ltd,Dissolution,2026-07,CDSCO-NSQ-seed
+ORS Powder,OR5502,Seed Care Ltd,Content uniformity,2026-08,CDSCO-NSQ-seed

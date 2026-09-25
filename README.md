@@ -24,9 +24,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 | `synopsis/generate_health_synopsis.js` | Rebuild the Word synopsis |
 | `synopsis/presentation/` | Evaluator deck builders |
 | `synopsis/Project_Explain_Hinglish.md` | Viva notes |
+| `care_pathway/` | CPU-runnable baseline: tools, verifier, pipeline, API, UI, GEPA offline, eval |
+| `tests/` | Fail-closed behaviour contracts (`pytest -q`) |
 
 No experimental accuracy number is claimed in this repository until it is measured.
 
 ## Status
 
-Phase-1 synopsis and decks. Implementation (tools, verifier, gold set) will land on feature branches via PRs.
+Phase-1 synopsis and decks plus CPU-runnable baseline (`care_pathway/`, see its README).
+B200 training + full 400–800 gold set remain future work on later branches.
