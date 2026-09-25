@@ -14,9 +14,17 @@ from pathlib import Path
 REQUIRED_KEYS = {"page_id", "boxes"}
 
 
+def _box_ok(box: dict) -> bool:
+    return isinstance(box, dict) and isinstance(box.get("box_id"), str) and isinstance(box.get("text"), str)
+
+
 def validate_box_file(path: Path) -> dict:
     rows = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
-    bad = [r.get("page_id", "?") for r in rows if not REQUIRED_KEYS.issubset(r)]
+    bad = [
+        r.get("page_id", "?") for r in rows
+        if not REQUIRED_KEYS.issubset(r) or not isinstance(r.get("boxes"), list)
+        or not all(_box_ok(b) for b in r["boxes"])
+    ]
     return {"pages": len(rows), "invalid": bad, "note": "box ids annotated by us"}
 
 
